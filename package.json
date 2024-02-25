@@ -1,0 +1,16 @@
+{
+  "name": "mrpack-js",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/pump": "^1.1.3",
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "compressing": "^1.10.0",
+    "pump": "^3.0.0"
+  }
+}
