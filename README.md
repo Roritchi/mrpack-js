@@ -12,11 +12,12 @@ Typescript should tell you what types you can use
 
 ```ts
 import * as mr from 'mrpack-js'
-import { Client } from "mrpack-js/mrindex";
 import fs from 'node:fs/promises'
+import fsSync from 'node:fs'
+import { Client } from 'mrpack-js/mrindex';
 
 let pack = await mr.initPack();
-let packFile = await fs.readFile("./test.mrpack");
+let packFile = await fs.readFile("./Cobblemon Modpack [Fabric] 1.4.1.mrpack");
 
 await pack.unpack(packFile);
 
@@ -27,20 +28,22 @@ console.log(pack.mrpack); // look at a modpack json to understand how this works
 pack.mrpack?.files.push({
     path: "mods/test.jar",
     hashes: {
-        "sha1": "xxx"
+        "sha1": "xxx",
+        "sha512": "xxx",
     },
     env: {
-        "client": Client.Optional,
-        "server": Client.Required
+        "client": "optional" as Client,
+        "server": "required" as Client
     },
     downloads: [],
     fileSize: 0
 });
 
 pack.overrides.push({
-    file: "", // string = file path | Buffer = file contents | ReadStream = file contents;
-    path: "" // path in modpack
+    file: Buffer.from("This is a test file!\nwith two lines, wow /:_:/"), // string = file path | Buffer = file contents | ReadStream = file contents;
+    path: "test.txt" // path in modpack
 });
+
 // END: Changes
 
 let outFile = fsSync.createWriteStream("./output.mrpack");
